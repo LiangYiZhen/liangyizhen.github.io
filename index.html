@@ -62,12 +62,16 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-博客搭建" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/08/31/hello-world/" class="article-date">
-  <time datetime="2019-08-31T02:34:38.141Z" itemprop="datePublished">2019-08-31</time>
+    <a href="/2019/09/02/博客搭建/" class="article-date">
+  <time datetime="2019-09-02T01:24:00.000Z" itemprop="datePublished">2019-09-02</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/博客搭建/">博客搭建</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -76,7 +80,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/31/hello-world/">Hello World</a>
+      <a class="article-title" href="/2019/09/02/博客搭建/">CodingPages申请SSL/TLS证书错误</a>
     </h1>
   
 
@@ -84,26 +88,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>参考链接：<a href="https://blog.csdn.net/lewky_liu/article/details/82432045" target="_blank" rel="noopener">https://blog.csdn.net/lewky_liu/article/details/82432045</a></p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>因没有申请SSL/TLS证书，或者证书过期导致网站不能正常访问，即http与https的问题。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>由于我的个人站点是同时部署到GitHubPages和CodingPages上的，接着在阿里云域名解析里进行了配置，即默认的解析线路将我的域名指向 liangyizhen.coding.me，国外的解析路线则是指向了 liangyizhen.github.io。</p>
+<p>之所以这样配置，是因为国内部分地区无法直接访问GitHub，自然就无法访问我部署在GitHub上的个人站点，于是我又选择了Coding.net的Pages服务，这样国内用户就可以快速访问到我部署在Coding Pages的个人站点，而国外用户则是快速访问到Coding Pages上的个人站点。</p>
+<p>问题就出现在这里，因为我第一次申请SSL/TLS证书的时候，还没有解析境外的线路，所以很快就申请成功了。后来添加了国外线路的解析，这导致在Coding Pages的后台申请证书时无法通过验证，自然就申请失败了。</p>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>由于我是在阿里云购买的域名，于是登陆到阿里云域名解析的后台系统，打开个人域名的解析设置，暂停对于境外线路的解析。这里暂停就行了，一般来说大概需要5分钟左右的生效时间，毕竟DNS解析是存在缓存的。</p>
+<p>五分钟后，我又进入Coding Pages服务的后台，再一次申请SSL/TLS证书，果不其然，几秒钟后我申请证书成功。</p>
+<p>最后，再次返回阿里云域名解析的后台，将境外解析的线路再次启用，嗯，完美。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/31/hello-world/" data-id="ck01pv7e50000ewsmyyfhsq5o" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/02/博客搭建/" data-id="ck01qfspc0000e0smglre8vy8" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客搭建/">博客搭建</a></li></ul>
+
     </footer>
   </div>
   
@@ -336,7 +337,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/29/我的考研方法论/" data-id="ck01pv7ev0001ewsm2hmndtlu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/29/我的考研方法论/" data-id="ck01qfspw0005e0smfc7tr962" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/考研方法论/">考研方法论</a></li></ul>
@@ -358,7 +359,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/考研方法论/">考研方法论</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/博客搭建/">博客搭建</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/考研方法论/">考研方法论</a></li></ul>
     </div>
   </div>
 
@@ -368,7 +369,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/考研方法论/">考研方法论</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客搭建/">博客搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/考研方法论/">考研方法论</a></li></ul>
     </div>
   </div>
 
@@ -378,7 +379,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/考研方法论/" style="font-size: 10px;">考研方法论</a>
+      <a href="/tags/博客搭建/" style="font-size: 10px;">博客搭建</a> <a href="/tags/考研方法论/" style="font-size: 10px;">考研方法论</a>
     </div>
   </div>
 
@@ -387,7 +388,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li></ul>
     </div>
   </div>
 
@@ -400,7 +401,7 @@
       <ul>
         
           <li>
-            <a href="/2019/08/31/hello-world/">Hello World</a>
+            <a href="/2019/09/02/博客搭建/">CodingPages申请SSL/TLS证书错误</a>
           </li>
         
           <li>
